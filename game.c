@@ -1,3 +1,11 @@
+/**
+    @file game.c
+    @author Matthew Bond, Rachel Hodgson
+    @date 07 October 2020
+    @brief Main game program
+ 
+ */
+
 #include <stdlib.h>
 
 #include "paddle.h"
