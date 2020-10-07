@@ -26,9 +26,7 @@ Paddle_str paddle_initial(void) {
 	paddle.pos = tinygl_point (4, 2);
 	paddle.pos_2 = tinygl_point (4, 3);
 	paddle.pos_3 = tinygl_point (4, 4);
-	
 
-	
 	return paddle;
 }
 
@@ -39,7 +37,6 @@ void paddle_initial_points(void) {
 	tinygl_draw_point (paddle.pos_2, 1);
 	tinygl_draw_point (paddle.pos_3, 1);
 	
-    
 }
 
 /* Add a new paddle point */
@@ -60,7 +57,6 @@ void point_add (tinygl_point_t pos, int direction) {
 /* Update the  paddle positions to the relevant directions */
 void point_update (tinygl_point_t pos1, tinygl_point_t pos2, tinygl_point_t pos3, int direction) {
 	
-
 	if (direction == 1) {
 		point_add (pos1, direction);
 		point_add (pos2, direction);
@@ -98,7 +94,6 @@ void south_paddle(int direction) {
 /* Check to make sure the paddle is within the matrix length before moving left */
 int check_paddle_north(void) {
 	
-	
 	if (paddle.pos_3.y >= TINYGL_HEIGHT/2) {
 		return 1;
 	} else {
@@ -108,7 +103,6 @@ int check_paddle_north(void) {
 	
 /* Check to make sure the paddle is within the matrix length before moving right */
 int check_paddle_south(void) {
-	
 	
 	if (paddle.pos.y <= TINYGL_HEIGHT/2) {
 		return 1;
