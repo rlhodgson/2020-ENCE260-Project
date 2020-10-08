@@ -18,19 +18,41 @@
 #include "led.h"
 #include "tinygl.h"
 #include "timer.h"
+#include "task.h"
 
 
 /* Define polling rate in Hz.  */
 #define LOOP_RATE 900
+#define BUTTON_POLL_RATE 100
+
+static void navswitch_task (__unused__ void *data)
+{
+    int direction = 0;
+    navswitch_update ();
+    
+    if (navswitch_push_event_p (NAVSWITCH_NORTH) && check_paddle_north() == 1)
+    {
+        north_paddle(direction);
+
+    }
+    
+    /* If switch pushed down, move the paddle to the left */
+    if (navswitch_push_event_p (NAVSWITCH_SOUTH) && check_paddle_south() == 1)
+    {
+        south_paddle(direction);
+
+    }
+    
+    tinygl_update ();
+}
+
 
 
 int main (void){
 	
-	int direction = 0;
     
     /* Initialising the system, navswitch and paddle modules */
 	system_init ();
-	navswitch_init ();
     paddle_initial();
     
     /* Initialising tinygl and relevant tinygl functions */
@@ -40,28 +62,24 @@ int main (void){
     /* Set the initial parameters */
     paddle_initial_points();
     
-    while (1)
+    
+    
+    
+    task_t tasks[] =
     {
-
-        /* Check if the switch has been pressed */
-        navswitch_update ();
-
-        /* If switch pushed up, move the paddle to the right */
-        if (navswitch_push_event_p (NAVSWITCH_NORTH) && check_paddle_north() == 1)
         {
-			north_paddle(direction);
+            .func = navswitch_task,
+            .period = LOOP_RATE / BUTTON_POLL_RATE,
+            .data = 0
+        },
+    };
 
-        }
-        
-        /* If switch pushed down, move the paddle to the left */
-        if (navswitch_push_event_p (NAVSWITCH_SOUTH) && check_paddle_south() == 1)
-        {
-            south_paddle(direction);
 
-        }
+    system_init ();
 
-        tinygl_update ();
-    }
+    task_schedule (tasks, ARRAY_SIZE (tasks));
+    return 0;
+    
     return 0;
 
 
