@@ -110,6 +110,21 @@ int check_paddle_south(void) {
 		return 0;
 	}
 }
+
+	
+int pos_first(void) {
+    return paddle.pos.y;
+}
+
+int pos_second(void) {
+    return paddle.pos_2.y;
+}
+
+int pos_third(void) {
+    return paddle.pos_3.y;
+}
+
+
 	
 
 
