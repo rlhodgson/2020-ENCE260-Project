@@ -12,6 +12,7 @@
 #include "tinygl.h"
 
 /* Define the paddle as a structure with the 3 relevant position aspects */
+
 typedef struct paddle_s Paddle_str;
 struct paddle_s {
 	tinygl_point_t pos, pos_2, pos_3;
@@ -50,6 +51,8 @@ int pos_first(void);
 int pos_second(void);
 
 int pos_third(void);
+
+int check_ball_paddle(tinygl_point_t ball);
 
 
 #endif
