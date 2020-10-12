@@ -11,13 +11,16 @@
 #include "tinygl.h"
 #include "pacer.h"
 #include "pio.h"
+#include "paddle.h"
 #include "../fonts/font3x5_1.h"
 
 /* Define the paddle as a structure with the 3 relevant position aspects */
+/*
 typedef struct paddle_s Paddle_str;
 struct paddle_s {
 	tinygl_point_t pos, pos_2, pos_3;
 }paddle;
+* */
 
 /* Initialise the paddle positions as individual points */
 Paddle_str paddle_initial(void) {
@@ -110,6 +113,7 @@ int check_paddle_south(void) {
 		return 0;
 	}
 }
+
 	
 int pos_first(void) {
     return paddle.pos.y;
@@ -122,6 +126,21 @@ int pos_second(void) {
 int pos_third(void) {
     return paddle.pos_3.y;
 }
+
+
+int check_ball_paddle(tinygl_point_t ball) {
+	
+	if (ball.y == paddle.pos.y || ball.y == paddle.pos_2.y || ball.y == paddle.pos_3.y) {
+		return 1;
+	}
+	
+	return 0;
+	
+		
+	
+}
+
+	
 
 
 
