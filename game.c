@@ -82,12 +82,15 @@ int main (void)
 			
 			if (col == 0) {
 				ball = ball_set_low(row, col, ball);
-				usart1_putc('c');
+				ir_uart_putc(ball.y);
 			}
 			
-			if (usart1_read_ready_p() != 0) {
-				ball = ball_set_high(row, col, ball);
+			
+			if (ir_uart_read_ready_p()) {
+				row = ir_uart_getc();
+				ball = ball_set_high(row, 0, ball);
 			}
+			
 				
 			
 			ball_tick = 0;
