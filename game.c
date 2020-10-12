@@ -20,6 +20,7 @@
 #include "timer.h"
 #include "task.h"
 #include "ball.h"
+#include "ir_uart.h"
 
 /* Define polling rate in Hz.  */
 #define LOOP_RATE 1000
@@ -38,16 +39,12 @@ int main (void)
     
 
     int row = 0;
-    int col = 0;
+    int col = 1;
     int rowinc = 1;
     int colinc = 1;
     
     
-    
-
     system_init ();
-
-
 
     pacer_init (LOOP_RATE);
     
@@ -78,6 +75,16 @@ int main (void)
         ball_tick++;
         
 		if (ball_tick >= LOOP_RATE / BALL_RATE) {
+			
+			if (col == 0) {
+				ball = ball_set_low(row, col, ball);
+				ir_uart_putc("c");
+			}
+			
+			if (ir_uart_read_ready_p() != 0) {
+				ball = ball_set_high(row, col, ball);
+			}
+				
 			
 			ball_tick = 0;
 	
