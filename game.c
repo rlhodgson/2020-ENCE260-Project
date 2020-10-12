@@ -82,10 +82,10 @@ int main (void)
 			
 			if (col == 0) {
 				ball = ball_set_low(row, col, ball);
-				ir_uart_putc('c');
+				usart_putc('c');
 			}
 			
-			if (ir_uart_read_ready_p() != 0) {
+			if (usart1_write_ready_p() != 0) {
 				ball = ball_set_high(row, col, ball);
 			}
 				
