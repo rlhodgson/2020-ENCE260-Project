@@ -21,6 +21,10 @@
 #include "task.h"
 #include "ball.h"
 #include "ir_uart.h"
+#include "usart1.h"
+#include "timer0.h"
+#include "prescale.h"
+
 
 /* Define polling rate in Hz.  */
 #define LOOP_RATE 1000
@@ -78,7 +82,7 @@ int main (void)
 			
 			if (col == 0) {
 				ball = ball_set_low(row, col, ball);
-				ir_uart_putc("c");
+				ir_uart_putc('c');
 			}
 			
 			if (ir_uart_read_ready_p() != 0) {
@@ -185,7 +189,6 @@ int main (void)
     
 
     
-
 
 
 
