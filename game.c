@@ -82,7 +82,7 @@ int main (void)
 			
 			if (col == 0) {
 				ball = ball_set_low(row, col, ball);
-				usart_putc('c');
+				usart1_putc('c');
 			}
 			
 			if (usart1_write_ready_p() != 0) {
