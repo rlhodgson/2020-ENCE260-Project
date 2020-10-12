@@ -85,7 +85,7 @@ int main (void)
 				usart1_putc('c');
 			}
 			
-			if (usart1_write_ready_p() != 0) {
+			if (usart1_read_ready_p() != 0) {
 				ball = ball_set_high(row, col, ball);
 			}
 				
