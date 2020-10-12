@@ -53,7 +53,8 @@ int main (void)
     pacer_init (LOOP_RATE);
     
     int direction = 0;
-    int check;
+    int check = 1;
+    int state = 0;
     
 	/* Initialising the system, navswitch and paddle modules */
     paddle_initial();
@@ -67,6 +68,7 @@ int main (void)
 
     paddle_initial_points();
     //tinygl_text ("Ball Game");
+    ir_uart_init();
 
 
     while (1)
@@ -75,66 +77,71 @@ int main (void)
 		
 		pacer_wait ();
 		
+		if (ir_uart_read_ready_p()) {
+			row = ir_uart_getc();
+			state = ir_uart_getc();
+			ball = ball_set_high(row, 0, ball);
+		}
 		
-        ball_tick++;
-        
-		if (ball_tick >= LOOP_RATE / BALL_RATE) {
+		if (state == 1) {
 			
-			if (col == 0) {
-				ball = ball_set_low(row, col, ball);
-				ir_uart_putc(ball.y);
-			}
+			ball_tick++;
 			
-			
-			if (ir_uart_read_ready_p()) {
-				row = ir_uart_getc();
-				ball = ball_set_high(row, 0, ball);
-			}
-			
+			if (ball_tick >= LOOP_RATE / BALL_RATE) {
 				
-			
-			ball_tick = 0;
-	
-			ball = ball_set_low(row, col, ball);
-			
-
-			if (col == 4) {
-				
-				check = check_ball_paddle(ball);
-			}
-
-				
-			if (check == 1) {
-				
-				// move ball
-			
-				col += colinc;
-				row += rowinc;
-				
-				// check ball is within the right place
-
-				if (row > 6 || row < 0)
-				{
-					// in future we woukd start the other screen if the row was < 0
-					row -= rowinc * 2;
-					rowinc = -rowinc;
+				if (col == 0) {
+					ball = ball_set_low(row, col, ball);
+					ir_uart_putc(ball.y);
+					ir_uart_putc(state);
+					state = 0;
 				}
-
-				if (col > 4 || col < 0)
-				{
-					// check if there has been a collision between ball and paddle, if so then continue
-					col -= colinc * 2;
-					colinc = -colinc;
-				}
+				
+				else {
+				
+					ball_tick = 0;
 			
-		
-				ball = ball_set_high(row, col, ball);
-				
-				
-			} else {
-				ball = ball_set_low(row, col, ball);
-				return 0;
+					ball = ball_set_low(row, col, ball);
+					
 
+					if (col == 4) {
+						
+						check = check_ball_paddle(ball);
+					}
+
+						
+					if (check == 1) {
+						
+						// move ball
+					
+						col += colinc;
+						row += rowinc;
+						
+						// check ball is within the right place
+
+						if (row > 6 || row < 0)
+						{
+							// in future we woukd start the other screen if the row was < 0
+							row -= rowinc * 2;
+							rowinc = -rowinc;
+						}
+
+						if (col > 4 || col < 0)
+						{
+							// check if there has been a collision between ball and paddle, if so then continue
+							col -= colinc * 2;
+							colinc = -colinc;
+						}
+					
+				
+						ball = ball_set_high(row, col, ball);
+						
+						
+					} else {
+						ball = ball_set_low(row, col, ball);
+						return 0;
+
+					}
+				}
 			}
 		}
 		
@@ -145,6 +152,12 @@ int main (void)
 			
 			nav_tick = 0;
 			navswitch_update ();
+			
+			if (navswitch_push_event_p (NAVSWITCH_PUSH))
+			{
+				state = 1;
+
+			}
 			
 			/* If switch pushed down, move the paddle to the right */
 			if (navswitch_push_event_p (NAVSWITCH_NORTH) && check_paddle_north() == 1)
