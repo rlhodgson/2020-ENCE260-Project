@@ -123,7 +123,7 @@ int main (void)
 				
 					
 			
-					ball = ball_set_low(row, col, ball);
+					ball = ball_set_high(row, col, ball);
 					
 
 					if (col == 4) {
