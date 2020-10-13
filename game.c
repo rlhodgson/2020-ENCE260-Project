@@ -79,6 +79,15 @@ int main (void)
 		
 		
 		
+		if (ir_uart_read_ready_p() && state == 0) {
+			row = ir_uart_getc();
+			state = ir_uart_getc();
+			ball = ball_set_high(row, 0, ball);
+		} 
+	
+		
+		
+		
 		if (state == 1) {
 			
 			ball_tick++;
@@ -139,13 +148,7 @@ int main (void)
 					}
 				}
 			}
-		} else {
-			if (ir_uart_read_ready_p()) {
-				row = ir_uart_getc();
-				state = ir_uart_getc();
-				ball = ball_set_high(row, 0, ball);
-		}
-	}
+		} 
 		
 			
 			
