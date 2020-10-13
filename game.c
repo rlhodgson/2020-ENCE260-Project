@@ -87,29 +87,26 @@ int main (void)
 		
 		ball_tick++;
 		
-		if (state == 0) {
-			if (ir_uart_read_ready_p()!= 0) {
+			
+		if (ball_tick >= LOOP_RATE / BALL_RATE) {
 				
-				recieved.row_s = ir_uart_getc();
-				//recieved.state_s = ir_uart_getc();
-				
-				row = recieved.row_s;
-				//state = recieved.state_s;
-				state = 1;
-				
-				ball = ball_set_high(row, 1, ball);
-			} 
-		}
-		
-		
-		
-		
+			ball_tick = 0;
 			
 			
 			
-			if (ball_tick >= LOOP_RATE / BALL_RATE) {
-				
-				ball_tick = 0;
+			if (state == 0) {
+				if (ir_uart_read_ready_p()!= 0) {
+					
+					recieved.row_s = ir_uart_getc();
+					//recieved.state_s = ir_uart_getc();
+					
+					row = recieved.row_s;
+					//state = recieved.state_s;
+					state = 1;
+					
+					ball = ball_set_high(row, 1, ball);
+				} 
+			}
 				
 			if (state == 1) {
 				
