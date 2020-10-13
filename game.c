@@ -39,10 +39,6 @@ typedef struct Pos_state_s {
 } Pos_state;
 
 
-void game_over(void) {
-	tinygl_text("Game Over");
-}
-
 
 int main (void)
 {
@@ -168,6 +164,7 @@ int main (void)
 						
 						
 					} else {
+						
 						ball = ball_set_low(row, col, ball);
 						return 0;
 
