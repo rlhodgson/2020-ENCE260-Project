@@ -103,13 +103,15 @@ int main (void)
 		
 		
 		
-		if (state == 1) {
+		
 			
 			
 			
-			if (ball_tick >= LOOP_RATE / BALL_RATE) {\
+			if (ball_tick >= LOOP_RATE / BALL_RATE) {
 				
 				ball_tick = 0;
+				
+			if (state == 1) {
 				
 				if (col == 0) {
 					ball = ball_set_low(row, col, ball);
