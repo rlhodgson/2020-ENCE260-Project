@@ -85,6 +85,8 @@ int main (void)
 		
 		pacer_wait ();
 		
+		ball_tick++;
+		
 		if (state == 0) {
 			if (ir_uart_read_ready_p()!= 0) {
 				
@@ -103,7 +105,7 @@ int main (void)
 		
 		if (state == 1) {
 			
-			ball_tick++;
+			
 			
 			if (ball_tick >= LOOP_RATE / BALL_RATE) {\
 				
