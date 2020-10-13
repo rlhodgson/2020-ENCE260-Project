@@ -26,7 +26,7 @@ void ball_init() {
 tinygl_point_t ball_set_low(int row, int col, tinygl_point_t ball) {
 	
 	//set the relevant point  
-	ball = tinygl_point(col, row);
+	ball = tinygl_point(row, col);
 			
 	//make it low to begin with
 	tinygl_draw_point (ball, 0);
@@ -40,7 +40,7 @@ tinygl_point_t ball_set_low(int row, int col, tinygl_point_t ball) {
 tinygl_point_t ball_set_high(int row, int col, tinygl_point_t ball) {
 	
 	//set the relevant point  
-	ball = tinygl_point(col, row);
+	ball = tinygl_point(row, col);
 			
 	//make it low to begin with
 	tinygl_draw_point (ball, 1);
