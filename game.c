@@ -72,7 +72,7 @@ int main (void)
     tinygl_text_dir_set (TINYGL_TEXT_DIR_ROTATE);
 
     paddle_initial_points();
-    //tinygl_text ("Ball Game");
+    
     ir_uart_init();
     
     
@@ -106,7 +106,7 @@ int main (void)
 					
 					
 					ball = ball_set_high(row, col, ball);
-					//col = 1;
+
 					
 				} 
 			}
@@ -165,6 +165,8 @@ int main (void)
 						
 					} else {
 						ball = ball_set_low(row, col, ball);
+						tinygl_text ("Game Over");
+						//ir_uart_puts("Game Over");
 						return 0;
 
 					}
