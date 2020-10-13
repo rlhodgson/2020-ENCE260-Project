@@ -117,7 +117,7 @@ int main (void)
 					
 					ball = ball_set_low(row, col, ball);
 					col = 1;
-					row += 1;
+					
 					ir_uart_putc(row);
 					ir_uart_putc(col);
 					state = 0;
