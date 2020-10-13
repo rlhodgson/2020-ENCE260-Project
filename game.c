@@ -41,6 +41,11 @@ typedef struct Pos_state_s {
 } Pos_state;
 
 
+void game_over(void) {
+	tinygl_text("Hello world\0");
+	tinygl_update ();
+}
+
 
 int main (void)
 {
@@ -62,6 +67,7 @@ int main (void)
     int direction = 0;
     int check = 1;
     int state = 0;
+    
     
 	/* Initialising the system, navswitch and paddle modules */
     paddle_initial();
@@ -102,19 +108,25 @@ int main (void)
 			if (state == 0) {
 				if (ir_uart_read_ready_p()!= 0) {
 					
-					recieved.row_s = ir_uart_getc();
-					recieved.col_s = ir_uart_getc();
+					if (ir_uart_getc() == 20) {
 					
-					row = recieved.row_s;
-					col = recieved.col_s;
-					state = 1;
-					
-					
-					ball = ball_set_high(row, col, ball);
+						recieved.row_s = ir_uart_getc();
+						recieved.col_s = ir_uart_getc();
+						
+						row = recieved.row_s;
+						col = recieved.col_s;
+						state = 1;
+						
+						
+						ball = ball_set_high(row, col, ball);
+					} else {
+						ball = ball_set_low(row, col, ball);
 
+						break;
 					
 				} 
 			}
+		}
 				
 			if (state == 1) {
 				
@@ -123,6 +135,7 @@ int main (void)
 					ball = ball_set_low(row, col, ball);
 					col = 1;
 					colinc = colinc * -1;
+					ir_uart_putc(20);
 					ir_uart_putc(row);
 					ir_uart_putc(col);
 					state = 0;
@@ -169,8 +182,12 @@ int main (void)
 						
 						
 					} else {
+						ir_uart_putc(30);
+
 						
 						ball = ball_set_low(row, col, ball);
+						
+
 						break;
 
 					}
@@ -212,7 +229,11 @@ int main (void)
 			
 			
 		}
-		return 0;
+		game_over();
+		tinygl_update ();
+		
+		
+		
 
 		
 		
