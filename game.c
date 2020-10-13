@@ -120,7 +120,7 @@ int main (void)
 						
 						
 						ball = ball_set_high(row, col, ball);
-					} else if (ir_uart_getc() == 30) {
+					} else {
 						ball = ball_set_low(row, col, ball);
                         PORTC |= (1 << 2);
                         tinygl_text('W\0');
