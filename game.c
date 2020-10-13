@@ -50,7 +50,7 @@ int main (void)
     int row = 0;
     int col = 1;
     int rowinc = 1;
-    int colinc = 1;
+    int colinc = -1;
     
     
     system_init ();
@@ -140,7 +140,7 @@ int main (void)
 						
 						// move ball
 					
-						col += colinc;
+						col += -1*(colinc);
 						row += rowinc;
 						
 						// check ball is within the right place
