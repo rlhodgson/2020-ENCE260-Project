@@ -86,8 +86,7 @@ int main (void)
 		pacer_wait ();
 		
 		
-		
-		if (ir_uart_read_ready_p() && state == 0) {
+		if (ir_uart_read_ready_p()!= 0 && state == 0) {
 			
 			recieved.row_s = ir_uart_getc();
 			recieved.state_s = ir_uart_getc();
