@@ -105,7 +105,9 @@ int main (void)
 			
 			ball_tick++;
 			
-			if (ball_tick >= LOOP_RATE / BALL_RATE) {
+			if (ball_tick >= LOOP_RATE / BALL_RATE) {\
+				
+				ball_tick = 0;
 				
 				if (col == 0) {
 					ball = ball_set_low(row, col, ball);
@@ -116,7 +118,7 @@ int main (void)
 				
 				else {
 				
-					ball_tick = 0;
+					
 			
 					ball = ball_set_low(row, col, ball);
 					
