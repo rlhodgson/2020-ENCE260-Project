@@ -61,7 +61,7 @@ int main (void)
     
     
     system_init ();
-    led_init();
+    //led_init();
 
     pacer_init (LOOP_RATE);
     
