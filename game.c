@@ -114,7 +114,7 @@ int main (void)
 				
 				if (col == 0) {
 					ball = ball_set_low(row, col, ball);
-					ir_uart_putc(ball.x);
+					ir_uart_putc(row);
 					//ir_uart_putc(state);
 					state = 0;
 				}
