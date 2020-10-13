@@ -33,6 +33,11 @@
 
 #define NAV_LOOP_RATE 1000
 
+typedef struct Pos_state_s {
+	int row_s;
+	int state_s;
+} Pos_state;
+
 
 
 int main (void)
@@ -69,6 +74,9 @@ int main (void)
     paddle_initial_points();
     //tinygl_text ("Ball Game");
     ir_uart_init();
+    
+    
+    Pos_state recieved = {0, 0};
 
 
     while (1)
@@ -80,8 +88,13 @@ int main (void)
 		
 		
 		if (ir_uart_read_ready_p() && state == 0) {
-			row = ir_uart_getc();
-			state = ir_uart_getc();
+			
+			recieved.row_s = ir_uart_getc();
+			recieved.state_s = ir_uart_getc();
+			
+			row = recieved.row_s;
+			state = recieved.state_s;
+			
 			ball = ball_set_high(row, 0, ball);
 		} 
 	
