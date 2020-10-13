@@ -145,6 +145,7 @@ int main (void)
 				state = ir_uart_getc();
 				ball = ball_set_high(row, 0, ball);
 		}
+	}
 		
 			
 			
