@@ -33,6 +33,8 @@
 
 #define NAV_LOOP_RATE 1000
 
+#define MESSAGE_RATE 10
+
 typedef struct Pos_state_s {
 	int row_s;
 	int col_s;
@@ -67,6 +69,9 @@ int main (void)
 	/* Initialising tinygl and relevant tinygl functions */
     tinygl_init (LOOP_RATE);
     tinygl_font_set (&font3x5_1);
+   
+	tinygl_text_speed_set (MESSAGE_RATE);
+    
 	tinygl_point_t ball;
 	tinygl_text_mode_set (TINYGL_TEXT_MODE_SCROLL);
     tinygl_text_dir_set (TINYGL_TEXT_DIR_ROTATE);
@@ -166,7 +171,7 @@ int main (void)
 					} else {
 						
 						ball = ball_set_low(row, col, ball);
-						return 0;
+						break;
 
 					}
 				}
@@ -207,6 +212,7 @@ int main (void)
 			
 			
 		}
+		return 0;
 
 		
 		
