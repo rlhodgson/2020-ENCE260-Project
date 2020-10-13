@@ -104,7 +104,9 @@ int main (void)
 					//state = recieved.state_s;
 					state = 1;
 					
-					ball = ball_set_high(row, 1, ball);
+					col = 1;
+					ball = ball_set_high(row, col, ball);
+					
 				} 
 			}
 				
