@@ -61,6 +61,7 @@ int main (void)
     
     
     system_init ();
+    led_init();
 
     pacer_init (LOOP_RATE);
     
@@ -121,6 +122,7 @@ int main (void)
 						ball = ball_set_high(row, col, ball);
 					} else {
 						ball = ball_set_low(row, col, ball);
+                        PORTC |= (1 << 2);
 
 						break;
 					
