@@ -35,7 +35,7 @@
 
 typedef struct Pos_state_s {
 	int row_s;
-	//int state_s;
+	int col_s;
 } Pos_state;
 
 
@@ -76,7 +76,7 @@ int main (void)
     ir_uart_init();
     
     
-    Pos_state recieved = {0};
+    Pos_state recieved = {0, 0};
 
 
     while (1)
@@ -98,15 +98,15 @@ int main (void)
 				if (ir_uart_read_ready_p()!= 0) {
 					
 					recieved.row_s = ir_uart_getc();
-					//recieved.state_s = ir_uart_getc();
+					recieved.col_s = ir_uart_getc();
 					
 					row = recieved.row_s;
-					//state = recieved.state_s;
+					col = recieved.col_s;
 					state = 1;
 					
 					
-					ball = ball_set_high(row, 1, ball);
-					col = 1;
+					ball = ball_set_high(row, col, ball);
+					//col = 1;
 					
 				} 
 			}
@@ -114,9 +114,12 @@ int main (void)
 			if (state == 1) {
 				
 				if (col == 0) {
+					
 					ball = ball_set_low(row, col, ball);
+					col = 1;
+					
 					ir_uart_putc(row);
-					//ir_uart_putc(state);
+					ir_uart_putc(col);
 					state = 0;
 				}
 				
@@ -149,7 +152,7 @@ int main (void)
 							rowinc = -rowinc;
 						}
 
-						if (col > 4 || col <= 0)
+						if (col > 4 || col < 0)
 						{
 							// check if there has been a collision between ball and paddle, if so then continue
 							col -= colinc * 2;
