@@ -123,7 +123,7 @@ int main (void)
 					} else {
 						ball = ball_set_low(row, col, ball);
                         PORTC |= (1 << 2);
-
+                        tinygl_text("Game Over\0");
 						break;
 					
 				} 
