@@ -50,7 +50,7 @@ int main (void)
     int row = 0;
     int col = 1;
     int rowinc = 1;
-    int colinc = -1;
+    int colinc = 1;
     
     
     system_init ();
@@ -117,7 +117,7 @@ int main (void)
 					
 					ball = ball_set_low(row, col, ball);
 					col = 1;
-					
+					colinc = colinc * -1
 					ir_uart_putc(row);
 					ir_uart_putc(col);
 					state = 0;
@@ -140,7 +140,7 @@ int main (void)
 						
 						// move ball
 					
-						col += -1*(colinc);
+						col += colinc;
 						row += rowinc;
 						
 						// check ball is within the right place
