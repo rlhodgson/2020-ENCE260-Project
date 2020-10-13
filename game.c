@@ -149,7 +149,7 @@ int main (void)
 							rowinc = -rowinc;
 						}
 
-						if (col > 4 || col < 0)
+						if (col > 4 || col <= 0)
 						{
 							// check if there has been a collision between ball and paddle, if so then continue
 							col -= colinc * 2;
