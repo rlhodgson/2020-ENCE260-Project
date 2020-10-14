@@ -13,6 +13,7 @@
 #include "display.h"
 #include "navswitch.h"
 #include "../fonts/font3x5_1.h"
+//#include "../fonts/font5x7_1.h"
 #include "pacer.h"
 #include "tinygl.h"
 #include "ball.h"
@@ -115,7 +116,8 @@ int main (void)
                         // Turn on blue LED for winner
                         PORTC |= (1 << 2);
                         
-                        //tinygl_text('W\0');
+                        tinygl_text("W\0");
+                        //tinygl_update ();
 						break;
 					
                     }
