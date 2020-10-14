@@ -116,7 +116,7 @@ int main (void)
                         // Turn on blue LED for winner
                         PORTC |= (1 << 2);
                         
-                        tinygl_text("W\0");
+                        tinygl_text('W');
                         tinygl_update ();
 						break;
 					
