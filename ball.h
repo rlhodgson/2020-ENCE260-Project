@@ -6,19 +6,15 @@
  
  */
 
-
 #ifndef BALL_H
 #define BALL_H
 
 #include "tinygl.h"
 
-
-//void ball_init();
+/* Turns the 'ball' off, sets the LED to low */
 tinygl_point_t ball_set_low(int row, int col, tinygl_point_t ball);
+
+/* Turns the 'ball' on, sets the LED to high */
 tinygl_point_t ball_set_high(int row, int col, tinygl_point_t ball);
-
-
-
-
 
 #endif
