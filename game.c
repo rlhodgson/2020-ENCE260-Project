@@ -15,16 +15,9 @@
 #include "navswitch.h"
 #include "../fonts/font3x5_1.h"
 #include "pacer.h"
-#include "led.h"
 #include "tinygl.h"
-#include "timer.h"
-#include "task.h"
 #include "ball.h"
 #include "ir_uart.h"
-#include "usart1.h"
-#include "timer0.h"
-#include "prescale.h"
-
 
 /* Define polling rate in Hz.  */
 #define LOOP_RATE 1000
