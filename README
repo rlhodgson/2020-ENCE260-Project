@@ -1,0 +1,23 @@
+Pong by Matthew Bond and Rachel Hodgson
+
+Pong is a 2 player game with the goal to continue to hit the ball until your opponent misses. In the case that the opponent misses the ball you will win. The winner will be notified by a blue LED on their board. 
+
+How to play:
+
+Initially run the "make program" command in the group directory. 
+
+First of all, decide who will start, the starting player (and only the starting player) should then push the black navigation switch straight down. This will initiate the ball bouncing on the start players screen. 
+
+Use the black navigation switch to move the paddle left and right. Pushing left (equivalent of down) will move the paddle and left and pushing it right (equivalent to up) will move it right. The ball needs to hit one of the three sections of the paddle to be sufficiently deflected. 
+
+If you miss the ball, you lose. 
+
+Pong programs:
+
+game	Main program that moves the ball and changes states accordingly, using Tinygl and other helper functions to directly light up points on the LED matrix and/or turn on the LED for the winner
+
+ball	Turns the ball on and off on each screen accordingly using Tinygl and helper functions to position the ball throughout the game
+
+paddle	Controls the movement of the paddle alongside checking for misses or hits using Tinygl helper functions to turn on and check the paddle
+
+
