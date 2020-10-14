@@ -108,8 +108,8 @@ int main (void)
 						col = recieved.col_s;
 						state = 1;
 						
-						
 						ball = ball_set_high(row, col, ball);
+                        
 					} else if (data_received == 30){
                         
 						ball = ball_set_low(row, col, ball);
