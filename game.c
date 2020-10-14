@@ -35,11 +35,13 @@ typedef struct Pos_state_s {
 	int col_s;
 } Pos_state;
 
-/* Print game over when game is over */
-void game_over(void) {
+/* Sets the matrix to allow for W and L to be displayed */
+void set_game_over(void) {
     
-	tinygl_text("Hello world\0");
-	tinygl_update ();
+    tinygl_clear();
+    tinygl_init (1);
+    tinygl_font_set (&font5x7_1);
+    tinygl_text_speed_set (1);
 }
 
 /* Main program loop */
@@ -63,6 +65,7 @@ int main (void)
     int direction = 0;
     int check = 1;
     int state = 0;
+    int data_received = 0;
     
     
 	// Initialising the system, navswitch and paddle modules
@@ -74,11 +77,7 @@ int main (void)
     tinygl_init (LOOP_RATE);
     tinygl_font_set (&font3x5_1);
    
-	tinygl_text_speed_set (MESSAGE_RATE);
-    
 	tinygl_point_t ball;
-	tinygl_text_mode_set (TINYGL_TEXT_MODE_SCROLL);
-    tinygl_text_dir_set (TINYGL_TEXT_DIR_ROTATE);
 
     // Variable to received IR communications
     Pos_state recieved = {0, 0};
@@ -97,8 +96,10 @@ int main (void)
             //check game state
 			if (state == 0) {
 				if (ir_uart_read_ready_p()!= 0) {
+                    
+                    data_received = ir_uart_getc();
 					
-					if (ir_uart_getc() == 20) {
+					if (data_received == 20) {
 					
 						recieved.row_s = ir_uart_getc();
 						recieved.col_s = ir_uart_getc();
@@ -109,22 +110,23 @@ int main (void)
 						
 						
 						ball = ball_set_high(row, col, ball);
-					} else {
+					} else if (data_received == 30){
                         
 						ball = ball_set_low(row, col, ball);
                         
                         // Turn on blue LED for winner
                         PORTC |= (1 << 2);
                         
-                        tinygl_clear();
-                        tinygl_init (500);
-                        tinygl_font_set (&font5x7_1);
+                        set_game_over();
+                        
+                        // Display W for winner
                         tinygl_text("W\0");
+                        
                         while (1) {
                             tinygl_update ();
                         }
+                        
 						break;
-					
                     }
                 }
             }
@@ -180,8 +182,16 @@ int main (void)
                         
 						ball = ball_set_low(row, col, ball);
 						
-						break;
-
+                        set_game_over();
+                        
+                        // Display L for loser
+                        tinygl_text("L\0");
+                        
+                        while (1) {
+                            tinygl_update ();
+                        }
+                        
+                        break;
 					}
 				}
 			}
