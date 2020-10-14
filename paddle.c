@@ -14,17 +14,8 @@
 #include "paddle.h"
 #include "../fonts/font3x5_1.h"
 
-/* Define the paddle as a structure with the 3 relevant position aspects */
-/*
-typedef struct paddle_s Paddle_str;
-struct paddle_s {
-	tinygl_point_t pos, pos_2, pos_3;
-}paddle;
-* */
-
 /* Initialise the paddle positions as individual points */
 Paddle_str paddle_initial(void) {
-	
 
 	paddle.pos = tinygl_point (4, 2);
 	paddle.pos_2 = tinygl_point (4, 3);
@@ -39,7 +30,6 @@ void paddle_initial_points(void) {
 	tinygl_draw_point (paddle.pos, 1);
 	tinygl_draw_point (paddle.pos_2, 1);
 	tinygl_draw_point (paddle.pos_3, 1);
-	
 }
 
 /* Add a new paddle point */
@@ -80,7 +70,6 @@ void north_paddle(int direction) {
 	paddle.pos_3.y--;
 	direction = 1;
 	point_update(paddle.pos, paddle.pos_2, paddle.pos_3, direction);
-	
 }
 
 /* Move paddle one to the right by updating the positions by 1 */
@@ -91,7 +80,6 @@ void south_paddle(int direction) {
 	paddle.pos_3.y++;
 	direction = 2;
 	point_update(paddle.pos, paddle.pos_2, paddle.pos_3, direction);
-	
 }
 
 /* Check to make sure the paddle is within the matrix length before moving left */
@@ -114,20 +102,7 @@ int check_paddle_south(void) {
 	}
 }
 
-	
-int pos_first(void) {
-    return paddle.pos.y;
-}
-
-int pos_second(void) {
-    return paddle.pos_2.y;
-}
-
-int pos_third(void) {
-    return paddle.pos_3.y;
-}
-
-
+/* Check if the ball hits the paddle */
 int check_ball_paddle(tinygl_point_t ball) {
 	
 	if (ball.y == paddle.pos.y || ball.y == paddle.pos_2.y || ball.y == paddle.pos_3.y) {
@@ -135,9 +110,6 @@ int check_ball_paddle(tinygl_point_t ball) {
 	}
 	
 	return 0;
-	
-		
-	
 }
 
 	
