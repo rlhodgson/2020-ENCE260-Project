@@ -117,7 +117,9 @@ int main (void)
                         PORTC |= (1 << 2);
                         
                         tinygl_text('W');
-                        tinygl_update ();
+                        while (1) {
+                            tinygl_update ();
+                        }
 						break;
 					
                     }
